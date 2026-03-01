@@ -50,7 +50,8 @@ export class CommentsController {
   // Post /comments/
   @Post()
   create(
-    @Body(new ValidationPipe()) createCommentDto: CreateCommentDto,
+    @Body(new ValidationPipe({ whitelist: true }))
+    createCommentDto: CreateCommentDto,
   ): CommentResponseDto {
     return this.commentsService.create(createCommentDto);
   }
@@ -59,7 +60,8 @@ export class CommentsController {
   @Put(':id')
   update(
     @Param('id', ParseUUIDPipe) id: UUID,
-    @Body(new ValidationPipe()) updateCommentDto: UpdateCommentDto,
+    @Body(new ValidationPipe({ whitelist: true }))
+    updateCommentDto: UpdateCommentDto,
   ): CommentResponseDto | undefined {
     try {
       return this.commentsService.update(id, updateCommentDto);
