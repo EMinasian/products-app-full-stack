@@ -15,8 +15,10 @@ model Comment {
 
 model User {
   id Int @default(autoincrement()) @id
+  firstname String
+  lastname String
   username String @unique
   email String @unique
-  profilePictureUrl String
+  profilePictureUrl String?
   password String
 }

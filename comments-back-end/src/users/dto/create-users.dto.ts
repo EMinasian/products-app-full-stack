@@ -1,12 +1,23 @@
-import { IsEmail, IsString, IsStrongPassword, Length } from 'class-validator';
+import {
+  IsEmail,
+  IsOptional,
+  IsString,
+  IsStrongPassword,
+  Length,
+} from 'class-validator';
 
 export class CreateUsersDto {
   @IsString()
   @Length(1, 255)
-  username: string;
+  firstname: string;
 
   @IsString()
-  profilePictureUrl: string;
+  @Length(1, 255)
+  lastname: string;
+
+  @IsOptional()
+  @IsString()
+  profilePictureUrl?: string;
 
   @IsString()
   @Length(1, 255)
