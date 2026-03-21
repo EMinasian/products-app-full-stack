@@ -3,7 +3,7 @@
 import { useActionState } from "react";
 import { useSearchParams } from "next/navigation";
 import NextLink from "next/link";
-import { Button, Stack, Link, Box, TextField } from "@mui/material";
+import { Button, Stack, Link, Box, TextField, Typography } from "@mui/material";
 import { createUser } from "./actions";
 
 
@@ -12,7 +12,7 @@ export default function AuthPage() {
   const searchParams = useSearchParams();
   const view = searchParams.get("view");
 
-  const [state, formAction] = useActionState(createUser, { error: "" })
+  const [formState, formAction] = useActionState(createUser, { errors: [] })
 
   return (
       <Box
@@ -32,6 +32,9 @@ export default function AuthPage() {
           <Link component={NextLink} href={view === "login" ? "/auth?view=signup" : "/auth?view=login"} variant="body2" align="center">
             {view === "login" ? "Don't have an account? Sign up here!" : "Already have an account? Login here!"}
           </Link>
+          {
+            formState?.errors.map((error: string) => <Typography key={error}>{error}</Typography>)
+          }
         </Stack>
       </Box>
   );

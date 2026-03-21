@@ -1,6 +1,7 @@
 'use server'
 
 import { redirect } from "next/navigation"
+import { getErrorMessages } from "@/utils/errors";
 
 const createUser = async (prevState: unknown, formData: FormData) => {
 
@@ -27,12 +28,12 @@ const createUser = async (prevState: unknown, formData: FormData) => {
 
     if (!res.ok) {
       console.log(`create user, request failed. Data: ${JSON.stringify(data)}`)
-      return { error: "" }
+      return { errors: getErrorMessages(data) }
     }
 
   } catch (error) {
     console.log(`create user, request failed. Error: ${error}`)
-    return { error: "" }
+    return { errors: getErrorMessages(error as Error) }
   }
 
   redirect('/comments')
