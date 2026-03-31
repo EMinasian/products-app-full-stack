@@ -1,7 +1,7 @@
 import { getErrorMessages } from "@/utils/errors";
 
 export const post = async (path: string, payload: unknown): Promise<{ errors: string[] } | void> => {
-    try {
+  try {
     const res = await fetch(
       `${process.env.API_URL}${path}`,
       {
