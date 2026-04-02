@@ -3,8 +3,13 @@
 import { get } from "@/utils/customFetch"
 
 const getCurrentUser = async () => {
-  const user = await get('/users/current')
-  return user
+  try {
+    const user = await get('/users/current')
+    return user
+  } catch (error) {
+    console.error('Error fetching current user:', error);
+    return null; 
+  }
 }
 
 export { getCurrentUser }
