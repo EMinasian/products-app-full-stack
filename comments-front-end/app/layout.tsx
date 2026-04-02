@@ -1,8 +1,7 @@
-import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
-import { CssBaseline, ThemeProvider } from "@mui/material";
+import { CssBaseline } from "@mui/material";
+import Providers from "@/components/Providers";
 import Header from "@/components/Header/Header";
 import "./globals.css";
-import darkTheme from "./dark.theme";
 
 export default function RootLayout({
   children,
@@ -13,13 +12,11 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <main className="flex flex-col items-center">
-        <AppRouterCacheProvider>
-          <ThemeProvider theme={darkTheme}>
-            <CssBaseline />
-            <Header />
-              {children}
-          </ThemeProvider>
-        </AppRouterCacheProvider>
+        <Providers>
+          <CssBaseline />
+          <Header />
+            {children}
+        </Providers>
         </main>
 
       </body>
