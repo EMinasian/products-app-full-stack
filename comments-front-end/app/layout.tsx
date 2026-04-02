@@ -1,7 +1,8 @@
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import Header from "@/components/Header/Header";
 import "./globals.css";
 import darkTheme from "./dark.theme";
-import { CssBaseline, ThemeProvider } from "@mui/material";
 
 export default function RootLayout({
   children,
@@ -15,6 +16,7 @@ export default function RootLayout({
         <AppRouterCacheProvider>
           <ThemeProvider theme={darkTheme}>
             <CssBaseline />
+            <Header />
               {children}
           </ThemeProvider>
         </AppRouterCacheProvider>
