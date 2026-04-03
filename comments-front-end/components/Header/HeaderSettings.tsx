@@ -6,7 +6,6 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import Avatar from '@mui/material/Avatar';
-import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import type { UserType } from '@/contexts/authContext';
 
@@ -26,12 +25,12 @@ const HeaderSettings = ({ user }: { user: UserType }) => {
 
   return (
            <Box sx={{ flexGrow: 0 }}>
-            <Typography sx={{ textAlign: 'center' }}>{`${user.firstname} ${user.lastname}`}</Typography>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+           
+              <IconButton onClick={handleOpenUserMenu} sx={{ display: 'flex', alignItems: 'center', gap: '0.5rem', p: 0 }}>
+                <Typography sx={{ textAlign: 'center' }}>{`${user.firstname} ${user.lastname}`}</Typography>
                 <Avatar alt={user.username} src={user.profilePictureUrl} />
+                 
               </IconButton>
-            </Tooltip>
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
