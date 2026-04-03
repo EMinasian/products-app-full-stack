@@ -47,13 +47,13 @@ export const get = async (path: string): Promise<{ errors: string[] } | unknown>
 
     if (!res.ok) {
       console.log(JSON.stringify(data))
-      return { errors: getErrorMessages(data) }
+      throw new Error(data.message || 'An error occurred while fetching data');
     }
 
     return data
 
   } catch (error) {
     console.log(JSON.stringify(error))
-    return { errors: getErrorMessages(error as Error) }
+    return null
   }
 }

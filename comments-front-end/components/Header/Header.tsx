@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,10 +14,21 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import HeaderSettings from './HeaderSettings';
+import AuthContext from '@/contexts/authContext';
+import type { AuthContextType } from '@/contexts/authContext';
+import { isLoginView } from '@/utils/checks';
+
+
 
 const pages = ['Products', 'Pricing', 'Blog'];
 
 function Header() {
+
+  const { isAuthenticated, user } = useContext<AuthContextType>(AuthContext)
+  const searchParams = useSearchParams()
+  const router = useRouter()
+
+  const view = searchParams.get('view')
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -78,7 +90,14 @@ function Header() {
               </Button>
             ))}
           </Box>
-          <HeaderSettings />
+          {
+            isAuthenticated ? 
+              <HeaderSettings user={user!} /> : 
+              <Button 
+                onClick={() => {router.push(`/auth?view=${isLoginView(view) ? 'signup' : 'login'}`)}}>
+                  {isLoginView(view) ? 'Signup' : 'Login'}
+              </Button>
+          }
         </Toolbar>
       </Container>
     </AppBar>

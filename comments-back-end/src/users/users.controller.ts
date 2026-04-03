@@ -26,7 +26,15 @@ export class UsersController {
 
   @Get('current')
   @UseGuards(JwtAuthGuard)
-  getCurrentUser(@CurrentUser() user: TokenPayload) {
-    return user;
+  async getCurrentUser(@CurrentUser() user: TokenPayload) {
+    const currentUser = await this.usersService.getUser({ id: user.userId });
+    return {
+      userId: currentUser.id,
+      firstname: currentUser.firstname,
+      lastname: currentUser.lastname,
+      email: currentUser.email,
+      username: currentUser.username,
+      profilePictureUrl: currentUser.profilePictureUrl,
+    };
   }
 }

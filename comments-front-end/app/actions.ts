@@ -1,15 +1,11 @@
 'use server'
 
 import { get } from "@/utils/customFetch"
+import type { UserType } from "@/contexts/authContext";
 
 const getCurrentUser = async () => {
-  try {
-    const user = await get('/users/current')
-    return user
-  } catch (error) {
-    console.error('Error fetching current user:', error);
-    return null; 
-  }
+  const user = await get('/users/current')
+  return user as UserType | null
 }
 
 export { getCurrentUser }

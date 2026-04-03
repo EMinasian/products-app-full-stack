@@ -8,10 +8,11 @@ import Menu from '@mui/material/Menu';
 import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import type { UserType } from '@/contexts/authContext';
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-const HeaderSettings = () => {
+const HeaderSettings = ({ user }: { user: UserType }) => {
 
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
@@ -25,9 +26,10 @@ const HeaderSettings = () => {
 
   return (
            <Box sx={{ flexGrow: 0 }}>
+            <Typography sx={{ textAlign: 'center' }}>{`${user.firstname} ${user.lastname}`}</Typography>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt={user.username} src={user.profilePictureUrl} />
               </IconButton>
             </Tooltip>
             <Menu

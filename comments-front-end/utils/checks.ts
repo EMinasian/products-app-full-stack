@@ -1,0 +1,1 @@
+export const isLoginView = (view: string | null) => view === "login"

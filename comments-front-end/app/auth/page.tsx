@@ -5,8 +5,7 @@ import { useSearchParams } from "next/navigation";
 import NextLink from "next/link";
 import { Button, Stack, Link, Box, TextField, Typography } from "@mui/material";
 import { createUser, authenticateUser } from "./actions";
-
-const isLoginView = (view: string | null) => view === "login"
+import { isLoginView } from "@/utils/checks";
 
 
 export default function AuthPage() {
