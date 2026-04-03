@@ -10,8 +10,6 @@ import MenuItem from '@mui/material/MenuItem';
 import type { UserType } from '@/contexts/authContext';
 import { logOutUser } from './actions';
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-
 const HeaderSettings = ({ user }: { user: UserType }) => {
 
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
@@ -48,8 +46,8 @@ const HeaderSettings = ({ user }: { user: UserType }) => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-                <MenuItem key='logout-setting' onClick={handleCloseUserMenu}>
-                  <Typography onClick={logOutUser} sx={{ textAlign: 'center' }}>Logout</Typography>
+                <MenuItem key='logout-setting' onClick={logOutUser}>
+                  <Typography sx={{ textAlign: 'center' }}>Logout</Typography>
                 </MenuItem>
             </Menu>
           </Box>   
