@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useContext } from "react";
+import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -18,7 +19,16 @@ import AuthContext from "@/contexts/authContext";
 import type { AuthContextType } from "@/contexts/authContext";
 import { isLoginView } from "@/utils/checks";
 
-const pages = ["Products", "Pricing", "Blog"];
+const pages = [
+  {
+    title: "Home",
+    url: "/",
+  },
+  {
+    title: "Comments",
+    url: "/comments",
+  },
+];
 
 function Header() {
   const { isAuthenticated, user } = useContext<AuthContextType>(AuthContext);
@@ -72,8 +82,14 @@ function Header() {
                 sx={{ display: { xs: "block", md: "none" } }}
               >
                 {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography sx={{ textAlign: "center" }}>{page}</Typography>
+                  <MenuItem key={page.title} onClick={handleCloseNavMenu}>
+                    <Typography
+                      sx={{ textAlign: "center" }}
+                      href={page.url}
+                      component={Link}
+                    >
+                      {page.title}
+                    </Typography>
                   </MenuItem>
                 ))}
               </Menu>
@@ -84,11 +100,14 @@ function Header() {
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {pages.map((page) => (
                 <Button
-                  key={page}
-                  onClick={handleCloseNavMenu}
+                  key={page.title}
+                  onClick={() => {
+                    handleCloseNavMenu();
+                    router.push(page.url);
+                  }}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
-                  {page}
+                  {page.title}
                 </Button>
               ))}
             </Box>
