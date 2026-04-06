@@ -21,4 +21,14 @@ model User {
   email String @unique
   profilePictureUrl String?
   password String
+  products Product[]
+}
+
+model Product {
+  id Int @default(autoincrement()) @id
+  name String
+  description String
+  price Float
+  userId Int
+  user User @relation(fields: [userId], references: [id]) 
 }
