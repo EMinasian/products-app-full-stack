@@ -1,7 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/comments-front-end/node_modules
+/products-front-end/node_modules
 /.pnp
 .pnp.*
 .yarn/*
@@ -14,7 +14,7 @@
 /coverage
 
 # next.js
-/comments-front-end/.next/
+/products-front-end/.next/
 /out/
 
 # production
@@ -31,7 +31,7 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
-/comments-front-end/.env.local
+/products-front-end/.env.local
 
 # vercel
 .vercel
@@ -43,17 +43,17 @@ next-env.d.ts
 
 
 # compiled output
-/comments-back-end/dist
-/comments-back-end/node_modules
-/comments-back-end/build
-/comments-back-end/generated/prisma
+/products-back-end/dist
+/products-back-end/node_modules
+/products-back-end/build
+/products-back-end/generated/prisma
 
 # dotenv environment variable files
-/comments-back-end/.env
-/comments-back-end/.env.development.local
-/comments-back-end/.env.test.local
-/comments-back-end/.env.production.local
-/comments-back-end/.env.local
+/products-back-end/.env
+/products-back-end/.env.development.local
+/products-back-end/.env.test.local
+/products-back-end/.env.production.local
+/products-back-end/.env.local
 
 # Logs
 logs
