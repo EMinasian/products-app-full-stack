@@ -7,10 +7,13 @@ const getHeaders = async () => {
   };
 };
 
-export const post = async (
-  path: string,
-  payload: unknown,
-): Promise<{ errors: string[] } | void> => {
+export const post = async ({
+  path,
+  payload,
+}: {
+  path: string;
+  payload: unknown;
+}): Promise<{ errors: string[] } | void> => {
   try {
     const res = await fetch(`${process.env.API_URL}${path}`, {
       method: "POST",
@@ -33,13 +36,18 @@ export const post = async (
   }
 };
 
-export const get = async <T>(
-  path: string,
-): Promise<{ errors: string[] } | unknown> => {
+export const get = async <T>({
+  path,
+  tags,
+}: {
+  path: string;
+  tags?: string[];
+}): Promise<{ errors: string[] } | unknown> => {
   try {
     const res = await fetch(`${process.env.API_URL}${path}`, {
       method: "GET",
       headers: await getHeaders(),
+      ...(tags && { next: { tags } }),
     });
 
     const data = await res.json();

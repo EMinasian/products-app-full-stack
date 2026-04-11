@@ -29,7 +29,7 @@ const createUser = async (prevState: unknown, formData: FormData) => {
     password: formData.get("password"),
   };
 
-  const res = await post("/users", payload);
+  const res = await post({ path: "/users", payload });
 
   if (res?.errors) {
     return { errors: res.errors };

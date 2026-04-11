@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Fab } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import CreatePostsModal from "./CreatePostsModal";
+import CreatePostsModal from "./CreateProductsModal";
 
 const CreatePostsButton = () => {
   const [open, setOpen] = useState(false);
