@@ -3,11 +3,11 @@ import { IsString, Length } from 'class-validator';
 export class CreateCommentDto {
   @IsString()
   @Length(1, 255)
-  title: string;
+  title!: string;
 
   @IsString()
-  content: string;
+  content!: string;
 
   @IsString()
-  authorId: string;
+  authorId!: string;
 }

@@ -9,11 +9,11 @@ import {
 export class CreateUsersDto {
   @IsString()
   @Length(1, 255)
-  firstname: string;
+  firstname!: string;
 
   @IsString()
   @Length(1, 255)
-  lastname: string;
+  lastname!: string;
 
   @IsOptional()
   @IsString()
@@ -22,10 +22,10 @@ export class CreateUsersDto {
   @IsString()
   @Length(1, 255)
   @IsEmail()
-  email: string;
+  email!: string;
 
   @IsString()
   @Length(8, 255)
   @IsStrongPassword()
-  password: string;
+  password!: string;
 }
