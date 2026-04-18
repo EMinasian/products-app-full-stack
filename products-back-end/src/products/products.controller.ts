@@ -69,6 +69,7 @@ export class ProductsController {
     _file: Express.Multer.File,
   ) {
     console.log('_file', _file); //log for now to avoid ts errors
+    return { message: 'Image uploaded successfully' };
   }
 
   @Get()
