@@ -1,19 +1,13 @@
-import { cookies } from "next/headers";
 import { getErrorMessages } from "@/utils/errors";
+import getHeaders from "@/utils/getHeaders";
 
-const getHeaders = async () => {
-  return {
-    Cookie: (await cookies()).toString(),
-  };
-};
-
-export const post = async ({
+export const post = async <T>({
   path,
   payload,
 }: {
   path: string;
   payload: unknown;
-}): Promise<{ errors: string[] } | void> => {
+}): Promise<{ errors?: string[]; data?: T } | void> => {
   try {
     const res = await fetch(`${process.env.API_URL}${path}`, {
       method: "POST",
@@ -30,6 +24,8 @@ export const post = async ({
       console.log(JSON.stringify(data));
       return { errors: getErrorMessages(data) };
     }
+
+    return { data };
   } catch (error) {
     console.log(JSON.stringify(error));
     return { errors: getErrorMessages(error as Error) };

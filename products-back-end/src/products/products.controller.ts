@@ -1,7 +1,7 @@
 import {
   Body,
   Controller,
-  FileTypeValidator,
+  // FileTypeValidator,
   Get,
   MaxFileSizeValidator,
   ParseFilePipe,
@@ -47,7 +47,7 @@ export class ProductsController {
   @UseInterceptors(
     FileInterceptor('current-image', {
       storage: diskStorage({
-        destination: 'pubic/products',
+        destination: 'public/products',
         filename: (req, file, callback) => {
           callback(
             null,
@@ -61,8 +61,8 @@ export class ProductsController {
     @UploadedFile(
       new ParseFilePipe({
         validators: [
-          new MaxFileSizeValidator({ maxSize: 500000 }),
-          new FileTypeValidator({ fileType: 'image/jpeg' }),
+          new MaxFileSizeValidator({ maxSize: 5000000 }),
+          // new FileTypeValidator({ fileType: 'image/jpeg' }),
         ],
       }),
     )

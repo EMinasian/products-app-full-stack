@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import type { CSSProperties } from "react";
 import {
   Button,
   Stack,
@@ -9,7 +10,8 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { createPost } from "./actions";
+import { createProduct } from "./actions";
+import { CloudUpload } from "@mui/icons-material";
 
 const styles = {
   position: "absolute",
@@ -23,6 +25,18 @@ const styles = {
   p: 4,
 };
 
+const fileInputStyles: CSSProperties = {
+  clip: "rect(0 0 0 0)",
+  clipPath: "inset(50%)",
+  height: 1,
+  overflow: "hidden",
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  whiteSpace: "nowrap",
+  width: 1,
+};
+
 const CreatePostsModal = ({
   open,
   handleClose,
@@ -31,16 +45,18 @@ const CreatePostsModal = ({
   handleClose: () => void;
 }) => {
   const [errors, setErrors] = useState<string[]>([]);
+  const [fileName, setFileName] = useState<string>("");
 
   const handleFormClose = () => {
     if (errors.length > 0) {
       setErrors([]);
     }
+    setFileName("");
     handleClose();
   };
 
   const handleFormSubmit = async (formData: FormData) => {
-    const response = await createPost(formData);
+    const response = await createProduct(formData);
     if (!response?.errors) {
       handleFormClose();
     } else {
@@ -65,6 +81,22 @@ const CreatePostsModal = ({
             required
           />
           <TextField name="price" label="Price" type="text" required />
+          <Button
+            component="label"
+            variant="outlined"
+            startIcon={<CloudUpload />}
+          >
+            Upload image
+            <input
+              type="file"
+              name="current-image"
+              style={fileInputStyles}
+              onChange={(e) =>
+                e.target.files && setFileName(e.target.files?.[0].name || "")
+              }
+            ></input>
+          </Button>
+          <Typography variant="body2">{fileName}</Typography>
           <Button type="submit" variant="contained" color="primary">
             Create product
           </Button>
