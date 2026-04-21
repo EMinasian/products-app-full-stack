@@ -4,4 +4,5 @@ export type ProductType = {
   price: number;
   id: number;
   userId: number;
+  imageExists: boolean;
 };
