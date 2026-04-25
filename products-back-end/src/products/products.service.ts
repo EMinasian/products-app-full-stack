@@ -50,11 +50,7 @@ export class ProductsService {
         fs.constants.F_OK,
       );
       return true;
-    } catch (error) {
-      console.error(
-        `Error checking image existence for product ${productId}:`,
-        error,
-      );
+    } catch {
       return false;
     }
   }

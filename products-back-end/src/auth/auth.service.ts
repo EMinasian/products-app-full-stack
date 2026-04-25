@@ -3,7 +3,6 @@ import * as bcrypt from 'bcrypt';
 import { UsersService } from '../users/users.service';
 import { User } from '@prisma/client';
 import { Response } from 'express';
-import ms from 'ms';
 import { ConfigService } from '@nestjs/config';
 import { TokenPayload } from './token-payload.interface';
 import { JwtService } from '@nestjs/jwt';
@@ -17,24 +16,14 @@ export class AuthService {
   ) {}
 
   login(user: User, response: Response) {
-    const expires = new Date();
-    expires.setMilliseconds(
-      Number(
-        expires.getMilliseconds() +
-          ms(this.configService.getOrThrow<number>('JWT_EXPIRATION')),
-      ),
-    );
-
     const tokenPayload: TokenPayload = {
       userId: user.id,
     };
-
     const token = this.jwtService.sign(tokenPayload);
 
     response.cookie('Authentication', token, {
       secure: true,
       httpOnly: true,
-      expires,
     });
 
     return { tokenPayload };
