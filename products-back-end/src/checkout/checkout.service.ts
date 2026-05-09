@@ -19,6 +19,9 @@ export class CheckoutService {
     }
 
     return this.stripe.checkout.sessions.create({
+      metadata: {
+        productId: product.id,
+      },
       line_items: [
         {
           price_data: {
@@ -35,6 +38,25 @@ export class CheckoutService {
       mode: 'payment',
       success_url: `${this.configService.getOrThrow('FE_BASE_URL')}/`,
       cancel_url: `${this.configService.getOrThrow('FE_BASE_URL')}/`,
+    });
+  }
+
+  async handleCheckoutWebhook(event: any) {
+    // eslint-disable-next-line
+    if (event?.type !== 'checkout.session.completed') {
+      return;
+    }
+
+    const session = await this.stripe.checkout.sessions.retrieve(
+      // eslint-disable-next-line
+      event.data.object.id,
+    );
+
+    if (!session.metadata) {
+      return;
+    }
+    await this.productsService.update(parseInt(session.metadata.productId), {
+      sold: true,
     });
   }
 }
